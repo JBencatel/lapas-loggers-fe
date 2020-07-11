@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Shores from "../components/Shores.vue";
 
 Vue.use(VueRouter);
 
@@ -13,7 +14,7 @@ const routes = [
   {
     path: "/shores",
     name: "Shores",
-    component: Home
+    component: Shores
   },
   {
     path: "/loggers",

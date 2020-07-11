@@ -1,3 +1,5 @@
+import ShoreService from "@/services/ShoreService.js";
+
 const initialState = () => ({
   variable1: undefined,
   variable2: undefined,
@@ -30,18 +32,17 @@ const actions = {
     commit("RESET");
   },
 
-  fetchVariable1({ commit }, data) {
-    return new Promise((resolve, reject) => {
-      // Make network request and fetch data
-      // and commit the data
-      commit("SET_VARIABLE_1", data);
-      resolve();
+  fetchShores() {
+    return new Promise(resolve => {
+      ShoreService.getShores(data => {
+        resolve(data);
+        //commit("SET_VARIABLE_1", data);
+      });
     });
   }
 };
 
 export default {
-  namespaced: true,
   state,
   getters,
   mutations,
