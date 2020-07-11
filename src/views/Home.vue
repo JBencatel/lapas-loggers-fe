@@ -1,17 +1,13 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <v-row align="center" justify="center" style="height: 100%">
+    <h1>Welcome to the Lapas Loggers Project</h1>
+  </v-row>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "Home",
-  components: {
-    HelloWorld
-  }
+
+  components: {}
 };
 </script>

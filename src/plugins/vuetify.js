@@ -3,10 +3,6 @@ import Vuetify from "vuetify/lib";
 
 Vue.use(Vuetify);
 
-let opts = {
-  icons: {
-    iconfont: "mdi"
-  }
-};
+let opts = {};
 
 export default new Vuetify(opts);
