@@ -21,3 +21,9 @@ export default {
   components: { AppNavigation }
 };
 </script>
+
+<style>
+html {
+  overflow: hidden;
+}
+</style>
