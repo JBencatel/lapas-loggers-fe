@@ -1,10 +1,6 @@
 <template>
   <v-container class="ma-5">
-    <v-data-table
-      :headers="headers"
-      :items="shores"
-      class="elevation-1"
-    >
+    <v-data-table :headers="headers" :items="shores" class="elevation-1">
       <template v-slot:top>
         <v-toolbar flat color="white">
           <v-toolbar-title>Shores</v-toolbar-title>
@@ -36,27 +32,35 @@
                       <v-text-field v-model="editedItem.code" label="Code" />
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field
+                      <v-autocomplete
                         v-model="editedItem.country_id"
+                        :items="countries"
+                        item-text="name"
+                        item-value="id"
                         label="Country"
                       />
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
-                      <v-text-field
+                      <v-autocomplete
                         v-model="editedItem.fwunit_id"
                         label="Field Work Unit"
+                        :items="fieldWorkUnits"
+                        item-text="name"
+                        item-value="id"
                       />
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.latitude"
                         label="Latitude"
+                        type="number"
                       />
                     </v-col>
                     <v-col cols="12" sm="6" md="4">
                       <v-text-field
                         v-model="editedItem.longitude"
                         label="Longitude"
+                        type="number"
                       />
                     </v-col>
                   </v-row>
@@ -83,7 +87,7 @@
       </template>
 
       <template v-slot:no-data>
-        <v-btn color="primary" @click="fetchShores">Reset</v-btn>
+        <v-btn color="primary" @click="initialize">Reset</v-btn>
       </template>
     </v-data-table>
   </v-container>
@@ -108,6 +112,7 @@ export default {
       { text: "Actions", value: "actions", sortable: false }
     ],
     shores: [],
+
     editedIndex: -1,
     editedItem: {
       code: "",
@@ -124,7 +129,10 @@ export default {
       fwunit_id: undefined,
       latitude: undefined,
       longitude: undefined
-    }
+    },
+
+    countries: [],
+    fieldWorkUnits: []
   }),
 
   computed: {
@@ -140,15 +148,29 @@ export default {
   },
 
   created() {
-    this.getShores();
+    this.initialize();
   },
 
   methods: {
-    ...mapActions(["fetchShores"]),
+    ...mapActions(["fetchShores", "fetchList"]),
+
+    initialize() {
+      this.getShores();
+      this.getOptionsLists();
+    },
 
     getShores() {
       this.fetchShores().then(data => {
         this.shores = data;
+      });
+    },
+
+    getOptionsLists() {
+      this.fetchList("countries").then(data => {
+        this.countries = data;
+      });
+      this.fetchList("field-work-units").then(data => {
+        this.fieldWorkUnits = data;
       });
     },
 
