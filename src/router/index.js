@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Explore from "../views/Explore.vue";
+import Management from "../views/Management.vue";
 import Shores from "../components/Shores.vue";
 
 Vue.use(VueRouter);
@@ -12,24 +14,36 @@ const routes = [
     component: Home
   },
   {
-    path: "/shores",
-    name: "Shores",
-    component: Shores
+    path: "/explore",
+    name: "Explore",
+    component: Explore
   },
   {
-    path: "/loggers",
-    name: "Loggers",
-    component: Home
-  },
-  {
-    path: "/servicings",
-    name: "Servicings",
-    component: Home
-  },
-  {
-    path: "/people",
-    name: "People",
-    component: Home
+    path: "/management",
+    name: "Management",
+    component: Management,
+    children: [
+      {
+        path: "/shores",
+        name: "Shores",
+        component: Shores
+      },
+      {
+        path: "/loggers",
+        name: "Loggers",
+        component: Home
+      },
+      {
+        path: "/servicings",
+        name: "Servicings",
+        component: Home
+      },
+      {
+        path: "/people",
+        name: "People",
+        component: Home
+      }
+    ]
   },
   {
     path: "/about",

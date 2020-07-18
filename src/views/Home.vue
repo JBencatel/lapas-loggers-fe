@@ -1,27 +1,67 @@
 <template>
   <v-container fluid fill-height class="home-hero">
-    <v-row justify="center" align="center" column pa-5 wrap class="text-center">
-      <v-col
-        cols="12"
-        class="display-3 font-weight-black white--text text-xs-center"
+    <v-container>
+      <v-row
+        justify="center"
+        align="center"
+        column
+        pa-5
+        wrap
+        class="text-center"
       >
-        Welcome to
-      </v-col>
-      <v-col
-        cols="12"
-        class="display-3 font-weight-black white--text text-xs-center mb-3"
-      >
-        LAPAS LOGGERS PROJECT
-      </v-col>
-    </v-row>
+        <v-col
+          cols="12"
+          class="display-3 font-weight-black white--text text-xs-center"
+        >
+          Welcome to
+        </v-col>
+        <v-col
+          cols="12"
+          class="display-3 font-weight-black white--text text-xs-center mb-3"
+        >
+          LAPAS LOGGERS PROJECT
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          v-for="item in menuItems"
+          :key="item.title"
+          cols='12'
+          lg="4"
+          md="6"
+          sm="12"
+        >
+          <home-menu-item
+            :title="item.title"
+            :link="item.link"
+            :icon="item.icon"
+          />
+        </v-col>
+      </v-row>
+    </v-container>
   </v-container>
 </template>
 
 <script>
+import HomeMenuItem from "../components/HomeMenuItem.vue";
 export default {
   name: "Home",
 
-  components: {}
+  components: { HomeMenuItem },
+
+  data() {
+    return {
+      menuItems: [
+        { title: "Explore", link: "/explore", icon: "mdi-compass" },
+        {
+          title: "Manage",
+          link: "/management",
+          icon: "mdi-card-bulleted-settings"
+        },
+        { title: "About", link: "/about", icon: "mdi-information" }
+      ]
+    };
+  }
 };
 </script>
 

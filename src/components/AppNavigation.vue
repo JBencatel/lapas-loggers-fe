@@ -39,6 +39,8 @@
 
 <script>
 export default {
+  name: 'AppNavigation',
+
   data: () => ({
     drawer: true,
     items: [
