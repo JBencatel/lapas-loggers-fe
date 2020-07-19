@@ -5,6 +5,7 @@ import Explore from "../views/Explore.vue";
 import Management from "../views/Management.vue";
 import About from "../views/About.vue";
 import Shores from "../components/pages/Management/Shores.vue";
+import OptionsLists from "../components/pages/Management/OptionsLists.vue";
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ const routes = [
         path: "/people",
         name: "People",
         component: About
+      },
+      {
+        path: "/lists",
+        name: "Options Lists",
+        component: OptionsLists
       }
     ]
   },

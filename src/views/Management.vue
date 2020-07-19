@@ -24,6 +24,11 @@ export default {
       { icon: "mdi-leak", text: "Loggers", link: "/loggers" },
       { icon: "mdi-calendar-refresh", text: "Servicings", link: "/servicings" },
       { icon: "mdi-account-group", text: "People", link: "/people" },
+      {
+        icon: "mdi-format-list-bulleted-type",
+        text: "Options Lists",
+        link: "/lists"
+      },
       { divider: true }
     ]
   })

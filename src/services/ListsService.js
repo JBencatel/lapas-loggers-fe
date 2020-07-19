@@ -10,5 +10,38 @@ export default {
       .catch(error => {
         onError(error);
       });
+  },
+
+  createListItem(listName, itemData, onSuccess, onError) {
+    return API()
+      .post("/" + listName, itemData)
+      .then(resp => {
+        onSuccess(resp.data);
+      })
+      .catch(error => {
+        onError(error);
+      });
+  },
+
+  updateListItem(listName, itemData, onSuccess, onError) {
+    return API()
+      .put("/" + listName, itemData)
+      .then(resp => {
+        onSuccess(resp.data);
+      })
+      .catch(error => {
+        onError(error);
+      });
+  },
+
+  removeListItem(listName, itemID, onSuccess, onError) {
+    return API()
+      .delete("/" + listName + "/" + itemID)
+      .then(resp => {
+        onSuccess(resp.data);
+      })
+      .catch(error => {
+        onError(error);
+      });
   }
 };
