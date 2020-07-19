@@ -1,5 +1,5 @@
 <template>
-  <v-container class="ma-5">
+  <div>
     <v-data-table :headers="headers" :items="shores" class="elevation-1">
       <template v-slot:top>
         <v-toolbar flat color="white">
@@ -90,7 +90,7 @@
         <v-btn color="primary" @click="initialize">Reset</v-btn>
       </template>
     </v-data-table>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -111,7 +111,6 @@ export default {
       { text: "Longitude", value: "longitude" },
       { text: "Actions", value: "actions", sortable: false }
     ],
-    shores: [],
 
     editedIndex: -1,
     editedItem: {
@@ -138,6 +137,10 @@ export default {
   computed: {
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";
+    },
+
+    shores() {
+      return this.$store.getters.getShores;
     }
   },
 
@@ -152,7 +155,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["fetchShores", "fetchList"]),
+    ...mapActions(["fetchShores", "fetchList", "addShore", "editShore"]),
 
     initialize() {
       this.getShores();
@@ -196,9 +199,9 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.shores[this.editedIndex], this.editedItem);
+        this.editShore(this.editedItem);
       } else {
-        this.shores.push(this.editedItem);
+        this.addShore(this.editedItem);
       }
       this.close();
     }

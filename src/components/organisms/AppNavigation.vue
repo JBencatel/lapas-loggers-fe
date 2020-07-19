@@ -39,18 +39,17 @@
 
 <script>
 export default {
-  name: 'AppNavigation',
+  name: "AppNavigation",
+
+  props: {
+    items: {
+      type: Array,
+      required: true
+    }
+  },
 
   data: () => ({
-    drawer: true,
-    items: [
-      { icon: "mdi-beach", text: "Shores", link: "/shores" },
-      { icon: "mdi-leak", text: "Loggers", link: "/loggers" },
-      { icon: "mdi-calendar-refresh", text: "Servicings", link: "/servicings" },
-      { icon: "mdi-account-group", text: "People", link: "/people" },
-      { divider: true },
-      { icon: "mdi-information", text: "About", link: "/about" }
-    ]
+    drawer: true
   })
 };
 </script>

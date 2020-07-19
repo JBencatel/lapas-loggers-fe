@@ -10,5 +10,27 @@ export default {
       .catch(error => {
         onError(error);
       });
+  },
+
+  storeShore(data, onSuccess, onError) {
+    return API()
+      .post("/shore", data)
+      .then(resp => {
+        onSuccess(resp.data);
+      })
+      .catch(error => {
+        onError(error);
+      });
+  },
+
+  updateShore(data, onSuccess, onError) {
+    return API()
+      .put("/shore", data)
+      .then(resp => {
+        onSuccess(resp.data);
+      })
+      .catch(error => {
+        onError(error);
+      });
   }
 };

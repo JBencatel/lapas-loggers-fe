@@ -1,17 +1,15 @@
 import ShoreService from "@/services/ShoreService.js";
 
 const initialState = () => ({
-  variable1: undefined,
-  variable2: undefined,
-  variable3: undefined
+  shores: []
 });
 
 const state = initialState();
 
 // Getter functions
 const getters = {
-  getVariable1(state) {
-    return state.varaible1;
+  getShores(state) {
+    return state.shores;
   }
 };
 
@@ -22,8 +20,8 @@ const mutations = {
       state[key] = newState[key];
     });
   },
-  SET_VARIABLE_1(state, data) {
-    state.varaible1 = data;
+  SET_SHORES(state, data) {
+    state.shores = data;
   }
 };
 
@@ -32,11 +30,35 @@ const actions = {
     commit("RESET");
   },
 
-  fetchShores() {
+  fetchShores({ commit }) {
     return new Promise(resolve => {
-      ShoreService.getShores(data => {
-        resolve(data);
-        //commit("SET_VARIABLE_1", data);
+      ShoreService.getShores(result => {
+        commit("SET_SHORES", result);
+        resolve(result);
+      }).catch(error => {
+        throw new Error(`API ${error}`);
+      });
+    });
+  },
+
+  addShore({ dispatch }, data) {
+    return new Promise(resolve => {
+      ShoreService.storeShore(data, result => {
+        dispatch("fetchShores");
+        resolve(result);
+      }).catch(error => {
+        throw new Error(`API ${error}`);
+      });
+    });
+  },
+
+  editShore({ dispatch }, data) {
+    return new Promise(resolve => {
+      ShoreService.updateShore(data, result => {
+        dispatch("fetchShores");
+        resolve(result);
+      }).catch(error => {
+        throw new Error(`API ${error}`);
       });
     });
   }

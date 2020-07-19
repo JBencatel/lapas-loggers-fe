@@ -3,7 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Explore from "../views/Explore.vue";
 import Management from "../views/Management.vue";
-import Shores from "../components/Shores.vue";
+import About from "../views/About.vue";
+import Shores from "../components/pages/Management/Shores.vue";
 
 Vue.use(VueRouter);
 
@@ -24,6 +25,11 @@ const routes = [
     component: Management,
     children: [
       {
+        path: "/projects",
+        name: "Projects",
+        component: About
+      },
+      {
         path: "/shores",
         name: "Shores",
         component: Shores
@@ -31,17 +37,17 @@ const routes = [
       {
         path: "/loggers",
         name: "Loggers",
-        component: Home
+        component: About
       },
       {
         path: "/servicings",
         name: "Servicings",
-        component: Home
+        component: About
       },
       {
         path: "/people",
         name: "People",
-        component: Home
+        component: About
       }
     ]
   },

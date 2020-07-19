@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import HomeMenuItem from "../components/HomeMenuItem.vue";
+import HomeMenuItem from "../components/molecules/HomeMenuItem.vue";
 export default {
   name: "Home",
 
