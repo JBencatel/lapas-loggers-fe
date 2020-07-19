@@ -155,7 +155,13 @@ export default {
   },
 
   methods: {
-    ...mapActions(["fetchShores", "fetchList", "addShore", "editShore"]),
+    ...mapActions([
+      "fetchShores",
+      "fetchOptionsList",
+      "addShore",
+      "editShore",
+      "removeShore"
+    ]),
 
     initialize() {
       this.getShores();
@@ -169,10 +175,10 @@ export default {
     },
 
     getOptionsLists() {
-      this.fetchList("countries").then(data => {
+      this.fetchOptionsList("countries").then(data => {
         this.countries = data;
       });
-      this.fetchList("field-work-units").then(data => {
+      this.fetchOptionsList("field-work-units").then(data => {
         this.fieldWorkUnits = data;
       });
     },
@@ -184,9 +190,8 @@ export default {
     },
 
     deleteItem(item) {
-      const index = this.shores.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
-        this.shores.splice(index, 1);
+        this.removeShore(item.id);
     },
 
     close() {

@@ -14,7 +14,7 @@ export default {
 
   storeShore(data, onSuccess, onError) {
     return API()
-      .post("/shore", data)
+      .post("/shores", data)
       .then(resp => {
         onSuccess(resp.data);
       })
@@ -25,7 +25,18 @@ export default {
 
   updateShore(data, onSuccess, onError) {
     return API()
-      .put("/shore", data)
+      .put("/shores", data)
+      .then(resp => {
+        onSuccess(resp.data);
+      })
+      .catch(error => {
+        onError(error);
+      });
+  },
+
+  deleteShore(shoreID, onSuccess, onError) {
+    return API()
+      .delete("/shores/" + shoreID)
       .then(resp => {
         onSuccess(resp.data);
       })

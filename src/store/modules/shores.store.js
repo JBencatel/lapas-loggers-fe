@@ -61,6 +61,17 @@ const actions = {
         throw new Error(`API ${error}`);
       });
     });
+  },
+
+  removeShore({ dispatch }, shoreID) {
+    return new Promise(resolve => {
+      ShoreService.deleteShore(shoreID, result => {
+        dispatch("fetchShores");
+        resolve(result);
+      }).catch(error => {
+        throw new Error(`API ${error}`);
+      });
+    });
   }
 };
 
