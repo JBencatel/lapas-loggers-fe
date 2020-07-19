@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-data-table :headers="headers" :items="shores" class="elevation-1">
+    <v-data-table
+      :headers="headers"
+      :items="shores"
+      class="elevation-1"
+      @click:row="openItem"
+    >
       <template v-slot:top>
         <v-toolbar flat color="white">
           <v-toolbar-title>Shores</v-toolbar-title>
@@ -78,10 +83,10 @@
       </template>
 
       <template v-slot:item.actions="{ item }">
-        <v-icon small class="mr-2" @click="editItem(item)">
+        <v-icon small class="mr-2" @click.stop="editItem(item)">
           mdi-pencil
         </v-icon>
-        <v-icon small @click="deleteItem(item)">
+        <v-icon small @click.stop="deleteItem(item)">
           mdi-delete
         </v-icon>
       </template>
@@ -96,6 +101,8 @@
 <script>
 import { mapActions } from "vuex";
 export default {
+  name: "ManageShoresList",
+
   data: () => ({
     dialog: false,
     headers: [
@@ -181,6 +188,10 @@ export default {
       this.fetchOptionsList("field-work-units").then(data => {
         this.fieldWorkUnits = data;
       });
+    },
+
+    openItem(item) {
+      this.$router.push({ name: "Shore Details", params: { id: item.id } });
     },
 
     editItem(item) {
