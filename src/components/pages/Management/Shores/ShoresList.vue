@@ -26,6 +26,7 @@
       :headers="headers"
       :items="shores"
       :loading="loading"
+      no-data-text="No shores have been created yet."
       class="elevation-1"
       @click:row="openItem"
     >
@@ -36,10 +37,6 @@
         <v-icon small @click.stop="deleteItem(item)">
           mdi-delete
         </v-icon>
-      </template>
-
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
       </template>
     </v-data-table>
   </v-container>
