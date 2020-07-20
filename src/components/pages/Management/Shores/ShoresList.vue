@@ -3,6 +3,7 @@
     <v-data-table
       :headers="headers"
       :items="shores"
+      :loading="loading"
       class="elevation-1"
       @click:row="openItem"
     >
@@ -105,6 +106,7 @@ export default {
 
   data: () => ({
     dialog: false,
+    loading: true,
     headers: [
       {
         text: "Code",
@@ -178,6 +180,7 @@ export default {
     getShores() {
       this.fetchShores().then(data => {
         this.shores = data;
+        this.loading = false;
       });
     },
 
