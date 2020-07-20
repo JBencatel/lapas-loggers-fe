@@ -2,11 +2,9 @@
   <v-container>
     <app-navigation :items="menuItems" />
 
-    <v-main><router-view /></v-main>
-
-    <v-footer color="indigo" app>
-      <span class="white--text">&copy; {{ new Date().getFullYear() }}</span>
-    </v-footer>
+    <v-main>
+      <router-view />
+    </v-main>
   </v-container>
 </template>
 
