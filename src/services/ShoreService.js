@@ -12,7 +12,18 @@ export default {
       });
   },
 
-  storeShore(data, onSuccess, onError) {
+  getShoreByID(id, onSuccess, onError) {
+    return API()
+      .get("/shores/" + id)
+      .then(resp => {
+        onSuccess(resp.data);
+      })
+      .catch(error => {
+        onError(error);
+      });
+  },
+
+  createShore(data, onSuccess, onError) {
     return API()
       .post("/shores", data)
       .then(resp => {

@@ -41,9 +41,20 @@ const actions = {
     });
   },
 
+  // eslint-disable-next-line no-unused-vars
+  fetchShore({ commit }, id) {
+    return new Promise(resolve => {
+      ShoreService.getShoreByID(id, result => {
+        resolve(result);
+      }).catch(error => {
+        throw new Error(`API ${error}`);
+      });
+    });
+  },
+
   addShore({ dispatch }, data) {
     return new Promise(resolve => {
-      ShoreService.storeShore(data, result => {
+      ShoreService.createShore(data, result => {
         dispatch("fetchShores");
         resolve(result);
       }).catch(error => {
