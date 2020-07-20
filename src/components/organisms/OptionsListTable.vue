@@ -7,17 +7,15 @@
       <v-data-table
         :headers="headers"
         :items="list"
+        :loading="loading"
         :items-per-page="5"
+        no-data-text="No items have been added to this list yet."
         calculate-widths
         dense
       >
         <template v-slot:item.actions="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
           <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
-        </template>
-
-        <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize">Reset</v-btn>
         </template>
       </v-data-table>
 
@@ -88,6 +86,7 @@ export default {
   },
 
   data: () => ({
+    loading: true,
     list: [],
     dialog: false,
     editedIndex: -1,
@@ -148,6 +147,7 @@ export default {
     getOptionsList() {
       this.fetchOptionsList(this.listName).then(data => {
         this.list = data;
+        this.loading = false;
       });
     },
 
