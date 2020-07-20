@@ -6,7 +6,7 @@ import Management from "../views/Management.vue";
 import About from "../views/About.vue";
 import ShoresPage from "../components/pages/Management/Shores/ShoresPage.vue";
 import ShoresList from "../components/pages/Management/Shores/ShoresList.vue";
-import ShoresDetails from "../components/pages/Management/Shores/ShoresDetails.vue";
+import ShoreDetails from "../components/pages/Management/Shores/ShoreDetails.vue";
 import OptionsLists from "../components/pages/Management/OptionsLists.vue";
 
 Vue.use(VueRouter);
@@ -45,7 +45,7 @@ const routes = [
           {
             path: ":id",
             name: "Shore Details",
-            component: ShoresDetails
+            component: ShoreDetails
           }
         ]
       },
