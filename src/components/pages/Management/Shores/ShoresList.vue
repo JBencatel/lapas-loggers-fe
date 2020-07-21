@@ -15,7 +15,7 @@
           :edited-item="editedItem"
           :form-title="formTitle"
           :countries="countries"
-          :field-work-unitss="fieldWorkUnits"
+          :field-work-units="fieldWorkUnits"
           @close="close"
           @save="save"
         />
