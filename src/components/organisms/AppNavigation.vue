@@ -2,7 +2,10 @@
   <div>
     <v-app-bar app color="indigo" dark clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title style="cursor: pointer" @click="$router.push('/')">
+      <v-toolbar-title
+        style="cursor: pointer"
+        @click="$router.push({ name: 'Home' })"
+      >
         Lapas Loggers
       </v-toolbar-title>
     </v-app-bar>
@@ -21,7 +24,12 @@
             </v-col>
           </v-row>
           <v-divider v-else-if="item.divider" :key="i" dark class="my-1" />
-          <v-list-item v-else :key="i" link :to="item.link">
+          <v-list-item
+            v-else
+            :key="i"
+            link
+            @click="$router.push({ name: item.page })"
+          >
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>

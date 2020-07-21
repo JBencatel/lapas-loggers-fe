@@ -17,15 +17,14 @@ export default {
 
   data: () => ({
     menuItems: [
-      { icon: "mdi-apple-safari", text: "Projects", link: "/projects" },
-      { icon: "mdi-beach", text: "Shores", link: "/shores" },
-      { icon: "mdi-leak", text: "Loggers", link: "/loggers" },
-      { icon: "mdi-calendar-refresh", text: "Servicings", link: "/servicings" },
-      { icon: "mdi-account-group", text: "People", link: "/people" },
+      { icon: "mdi-beach", text: "Shores", page: "Shores List" },
+      { icon: "mdi-leak", text: "Loggers", page: "Loggers" },
+      { icon: "mdi-calendar-refresh", text: "Servicings", page: "Servicings" },
+      { icon: "mdi-account-group", text: "People", page: "People" },
       {
         icon: "mdi-format-list-bulleted-type",
         text: "Options Lists",
-        link: "/lists"
+        page: "Options Lists"
       },
       { divider: true }
     ]

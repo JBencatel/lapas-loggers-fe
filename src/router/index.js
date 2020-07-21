@@ -28,11 +28,6 @@ const routes = [
     component: Management,
     children: [
       {
-        path: "/projects",
-        name: "Projects",
-        component: About
-      },
-      {
         path: "/shores",
         name: "Shores",
         component: ShoresPage,

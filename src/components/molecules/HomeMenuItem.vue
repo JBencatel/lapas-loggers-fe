@@ -1,5 +1,5 @@
 <template>
-  <v-card max-width="100%" :to="link">
+  <v-card max-width="100%" @click="goTo(page)">
     <v-card-title v-text="title" class="text-center" />
   </v-card>
 </template>
@@ -11,7 +11,13 @@ export default {
   props: {
     title: String,
     icon: String,
-    link: String
+    page: String
+  },
+
+  methods: {
+    goTo(page){
+      this.$router.push({ name: page})
+    }
   }
 };
 </script>

@@ -33,7 +33,7 @@
         >
           <home-menu-item
             :title="item.title"
-            :link="item.link"
+            :page="item.page"
             :icon="item.icon"
           />
         </v-col>
@@ -52,13 +52,13 @@ export default {
   data() {
     return {
       menuItems: [
-        { title: "Explore", link: "/explore", icon: "mdi-compass" },
+        { title: "Explore", page: "Explore", icon: "mdi-compass" },
         {
           title: "Manage",
-          link: "/management",
+          page: "Shores List",
           icon: "mdi-card-bulleted-settings"
         },
-        { title: "About", link: "/about", icon: "mdi-information" }
+        { title: "About", page: "About", icon: "mdi-information" }
       ]
     };
   }
