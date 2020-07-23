@@ -1,15 +1,12 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Explore from "../views/Explore.vue";
-import Management from "../views/Management.vue";
-import About from "../views/About.vue";
 import ShoresPage from "../components/pages/Management/Shores/ShoresPage.vue";
 import ShoresList from "../components/pages/Management/Shores/ShoresList.vue";
 import ShoreDetails from "../components/pages/Management/Shores/Details/ShoreDetails.vue";
 import PositionsPage from "../components/pages/Management/Positions/PositionsPage.vue";
 import LoggersPage from "../components/pages/Management/Loggers/LoggersPage.vue";
 import ServicingsPage from "../components/pages/Management/Servicings/ServicingsPage.vue";
+import PeoplePage from "../components/pages/Management/People/PeoplePage.vue";
 import OptionsLists from "../components/pages/Management/OptionsLists.vue";
 
 Vue.use(VueRouter);
@@ -18,17 +15,17 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: () => import("../views/Home.vue")
   },
   {
     path: "/explore",
     name: "Explore",
-    component: Explore
+    component: () => import("../views/Explore.vue")
   },
   {
     path: "/management",
     name: "Management",
-    component: Management,
+    component: () => import("../views/Management.vue"),
     children: [
       {
         path: "shores",
@@ -65,7 +62,7 @@ const routes = [
       {
         path: "people",
         name: "People",
-        component: About
+        component: PeoplePage
       },
       {
         path: "lists",
