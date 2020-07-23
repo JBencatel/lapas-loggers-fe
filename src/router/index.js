@@ -6,7 +6,8 @@ import Management from "../views/Management.vue";
 import About from "../views/About.vue";
 import ShoresPage from "../components/pages/Management/Shores/ShoresPage.vue";
 import ShoresList from "../components/pages/Management/Shores/ShoresList.vue";
-import ShoreDetails from "../components/pages/Management/Shores/ShoreDetails.vue";
+import ShoreDetails from "../components/pages/Management/Shores/Details/ShoreDetails.vue";
+import PositionsPage from "../components/pages/Management/Positions/PositionsPage.vue";
 import OptionsLists from "../components/pages/Management/OptionsLists.vue";
 
 Vue.use(VueRouter);
@@ -28,7 +29,7 @@ const routes = [
     component: Management,
     children: [
       {
-        path: "/shores",
+        path: "shores",
         name: "Shores",
         component: ShoresPage,
         children: [
@@ -45,22 +46,27 @@ const routes = [
         ]
       },
       {
-        path: "/loggers",
+        path: "positions",
+        name: "Positions",
+        component: PositionsPage
+      },
+      {
+        path: "loggers",
         name: "Loggers",
         component: About
       },
       {
-        path: "/servicings",
+        path: "servicings",
         name: "Servicings",
         component: About
       },
       {
-        path: "/people",
+        path: "people",
         name: "People",
         component: About
       },
       {
-        path: "/lists",
+        path: "lists",
         name: "Options Lists",
         component: OptionsLists
       }
