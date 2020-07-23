@@ -34,6 +34,12 @@ export default {
           editable: true
         },
         {
+          title: "Logger Types",
+          listName: "logger-types",
+          fields: [{ text: "Name", value: "name"}],
+          editable: true
+        },
+        {
           title: "Levels",
           listName: "shore-levels",
           fields: [
@@ -50,21 +56,6 @@ export default {
             { text: "Name", value: "name" }
           ],
           editable: false
-        },
-        {
-          title: "Microhabitats",
-          listName: "microhabitats",
-          fields: [
-            { text: "Code", value: "code" },
-            { text: "Name", value: "name" }
-          ],
-          editable: true
-        },
-        {
-          title: "Logger Types",
-          listName: "logger-types",
-          fields: [{ text: "Name", value: "name"}],
-          editable: true
         },
         {
           title: "Countries",
