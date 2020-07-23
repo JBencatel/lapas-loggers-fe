@@ -7,7 +7,14 @@
 
       <v-dialog v-model="dialog" max-width="500px">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="primary" dark class="mb-2" v-bind="attrs" v-on="on">
+          <v-btn
+            color="primary"
+            dark
+            class="mb-2"
+            v-bind="attrs"
+            v-on="on"
+            @click="createItem"
+          >
             New Item
           </v-btn>
         </template>
@@ -28,7 +35,6 @@
       :loading="loading"
       no-data-text="No shores have been created yet."
       class="elevation-1"
-      @click:row="openItem"
     >
       <template v-slot:item.actions="{ item }">
         <v-icon small class="mr-2" @click.stop="editItem(item)">
@@ -69,17 +75,10 @@ export default {
     ],
 
     editedIndex: -1,
-    editedItem: {
-      code: "",
-      name: "",
-      country_id: undefined,
-      fwunit_id: undefined,
-      latitude: undefined,
-      longitude: undefined
-    },
+    editedItem: {},
     defaultItem: {
-      code: "",
-      name: "",
+      code: undefined,
+      name: undefined,
       country_id: undefined,
       fwunit_id: undefined,
       latitude: undefined,
@@ -140,8 +139,12 @@ export default {
       });
     },
 
-    openItem(item) {
+    /* openItem(item) {
       this.$router.push({ name: "Shore Details", params: { id: item.id } });
+    }, */
+
+    createItem() {
+      this.editedItem = Object.assign({}, this.defaultItem);
     },
 
     editItem(item) {
@@ -169,6 +172,7 @@ export default {
       } else {
         this.addShore(this.editedItem);
       }
+      this.getShores();
       this.close();
     }
   }

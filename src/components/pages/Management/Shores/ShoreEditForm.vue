@@ -8,10 +8,10 @@
       <v-container>
         <v-row>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="editedItem.name" label="Shore name" />
+            <v-text-field v-model="editedItem.code" label="Code" />
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field v-model="editedItem.code" label="Code" />
+            <v-text-field v-model="editedItem.name" label="Shore name" />
           </v-col>
           <v-col cols="12" sm="6" md="4">
             <v-autocomplete

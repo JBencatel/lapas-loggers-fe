@@ -97,7 +97,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import ShoreEditForm from "./ShoreEditForm";
+import ShoreEditForm from "../ShoreEditForm";
 export default {
   name: "ManagementShoreDtailsCard",
 
