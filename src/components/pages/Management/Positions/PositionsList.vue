@@ -68,18 +68,11 @@ export default {
         align: "start",
         value: "code"
       },
-      { text: "Shore", value: "shore_id" },
-      { text: "Level", value: "shore_level_id" },
-      { text: "Exposure", value: "shore_exposure_id" },
-      { text: "Replicate", value: "shore_replicate" },
-      { text: "Subreplicate", value: "shore_subreplicate" },
       { text: "Slope", value: "slope" },
       { text: "Orientation", value: "orientation" },
-      { text: "Microhabitat", value: "microhabitat" },
       { text: "Deployment Date", value: "deployment_date" },
       { text: "Termination Date", value: "termination_date" },
       { text: "Inactive", value: "inactive" },
-      { text: "Old Number", value: "old_number" },
       { text: "Actions", value: "actions", sortable: false }
     ],
 

@@ -17,13 +17,6 @@
             />
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field
-              label="Original Name"
-              :value="editedItem.original_name"
-              type="text"
-            />
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
             <v-autocomplete
               label="Position"
               v-model="editedItem.position_id"
@@ -107,6 +100,13 @@
               :label="editedItem.inactive ? 'Inactive' : 'Active'"
               color="red darken-"
               :value="false"
+            />
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
+            <v-text-field
+              label="Original Name"
+              :value="editedItem.original_name"
+              type="text"
             />
           </v-col>
         </v-row>

@@ -61,18 +61,12 @@ export default {
     dialog: false,
     loading: true,
     headers: [
-      {
-        text: "Code",
-        align: "start",
-        value: "code"
-      },
-      { text: "Name", value: "name" },
+      { text: "Name", align: "start", value: "name" },
       { text: "Position", value: "position_id" },
       { text: "Logger Type", value: "logger_type" },
       { text: "Deployment Date", value: "deployment_date" },
       { text: "Termination Date", value: "termination_date" },
       { text: "Inactive", value: "inactive" },
-      { text: "Original Name", value: "original_name" },
       { text: "Actions", value: "actions", sortable: false }
     ],
 
