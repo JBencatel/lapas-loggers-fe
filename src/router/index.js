@@ -9,6 +9,7 @@ import ShoresList from "../components/pages/Management/Shores/ShoresList.vue";
 import ShoreDetails from "../components/pages/Management/Shores/Details/ShoreDetails.vue";
 import PositionsPage from "../components/pages/Management/Positions/PositionsPage.vue";
 import LoggersPage from "../components/pages/Management/Loggers/LoggersPage.vue";
+import ServicingsPage from "../components/pages/Management/Servicings/ServicingsPage.vue";
 import OptionsLists from "../components/pages/Management/OptionsLists.vue";
 
 Vue.use(VueRouter);
@@ -59,7 +60,7 @@ const routes = [
       {
         path: "servicings",
         name: "Servicings",
-        component: About
+        component: ServicingsPage
       },
       {
         path: "people",
