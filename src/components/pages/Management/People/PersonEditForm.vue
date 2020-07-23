@@ -12,7 +12,7 @@
               label="Name"
               v-model="editedItem.name"
               type="text"
-              :rules="requiredRules"
+              
               required
             />
           </v-col>
@@ -21,7 +21,7 @@
               label="Nickname"
               v-model="editedItem.nickname"
               type="text"
-              :rules="requiredRules"
+              
               required
             />
           </v-col>

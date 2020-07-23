@@ -20,7 +20,7 @@
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
                   v-model="editedItem.date"
-                  label="Deployment date"
+                  label="Date"
                   prepend-icon="mdi-calendar"
                   readonly
                   v-bind="attrs"
@@ -42,7 +42,7 @@
               :items="shores"
               item-text="name"
               item-value="id"
-              :rules="requiredRules"
+              
               required
             />
           </v-col>

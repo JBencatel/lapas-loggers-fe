@@ -10,9 +10,8 @@
           <v-col cols="12" sm="6" md="4">
             <v-text-field
               label="Name"
-              :value="editedItem.name"
+              v-model="editedItem.name"
               type="text"
-              :rules="requiredRules"
               required
             />
           </v-col>
@@ -23,7 +22,6 @@
               :items="positions"
               item-text="code"
               item-value="id"
-              :rules="requiredRules"
               required
             />
           </v-col>
@@ -34,7 +32,6 @@
               :items="loggerTypes"
               item-text="name"
               item-value="id"
-              :rules="requiredRules"
               required
             />
           </v-col>
@@ -105,7 +102,7 @@
           <v-col cols="12" sm="6" md="4">
             <v-text-field
               label="Original Name"
-              :value="editedItem.original_name"
+              v-model="editedItem.original_name"
               type="text"
             />
           </v-col>

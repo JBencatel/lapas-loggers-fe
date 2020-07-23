@@ -32,7 +32,7 @@
               :items="shores"
               item-text="name"
               item-value="id"
-              :rules="requiredRules"
+              
               required
             />
           </v-col>
@@ -43,7 +43,7 @@
               :items="shoreLevels"
               item-text="name"
               item-value="id"
-              :rules="requiredRules"
+              
               required
             />
           </v-col>
@@ -54,7 +54,7 @@
               :items="shoreExposures"
               item-text="name"
               item-value="id"
-              :rules="requiredRules"
+              
               required
             />
           </v-col>
@@ -63,7 +63,7 @@
               label="Replicate"
               v-model="editedItem.shore_replicate"
               type="number"
-              :rules="requiredRules"
+              
               required
             />
           </v-col>
@@ -75,7 +75,7 @@
               type="text"
               counter
               maxlength="1"
-              :rules="requiredRules"
+              
               required
             />
           </v-col>
@@ -153,8 +153,7 @@
             <v-switch
               v-model="editedItem.inactive"
               :label="editedItem.inactive ? 'Inactive' : 'Active'"
-              color="red darken-"
-              :value="false"
+              color="red darken-3"
             />
           </v-col>
           <v-col cols="12" sm="6" md="4">

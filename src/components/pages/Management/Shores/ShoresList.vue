@@ -124,8 +124,7 @@ export default {
     },
 
     getShores() {
-      this.fetchShores().then(data => {
-        this.shores = data;
+      this.fetchShores().then(() => {
         this.loading = false;
       });
     },

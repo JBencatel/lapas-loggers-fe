@@ -5,7 +5,7 @@ export default {
     return API()
       .get("/people")
       .then(resp => {
-        onSuccess(resp.data.data);
+        onSuccess(resp.data);
       })
       .catch(error => {
         onError(error);
