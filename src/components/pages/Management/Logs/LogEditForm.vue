@@ -8,103 +8,35 @@
       <v-container>
         <v-row>
           <v-col cols="12" sm="6" md="4">
-            <v-text-field
-              label="Name"
-              v-model="editedItem.name"
-              type="text"
-              required
-            />
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
             <v-autocomplete
-              label="Position"
-              v-model="editedItem.position_id"
-              :items="positions"
-              item-text="code"
-              item-value="id"
-              required
-            />
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <v-autocomplete
-              label="Log Type"
-              v-model="editedItem.log_type_id"
-              :items="logTypes"
+              label="Logger"
+              v-model="editedItem.logger_id"
+              :items="loggers"
               item-text="name"
               item-value="id"
               required
             />
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-menu
-              ref="deploymentDatePicker"
-              v-model="deploymentDatePicker"
-              :close-on-content-click="false"
-              :nudge-right="150"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="editedItem.deployment_date"
-                  label="Deployment Date"
-                  prepend-icon="mdi-calendar"
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                />
-              </template>
-              <v-date-picker
-                v-model="editedItem.deployment_date"
-                no-title
-                scrollable
-                @input="deploymentDatePicker = false"
-              />
-            </v-menu>
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <v-menu
-              ref="terminationDatePicker"
-              v-model="terminationDatePicker"
-              :close-on-content-click="false"
-              :nudge-right="150"
-              transition="scale-transition"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="editedItem.termination_date"
-                  label="Termination Date"
-                  prepend-icon="mdi-calendar"
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                />
-              </template>
-              <v-date-picker
-                v-model="editedItem.termination_date"
-                no-title
-                scrollable
-                @input="terminationDatePicker = false"
-              />
-            </v-menu>
-          </v-col>
-          <v-col cols="12" sm="6" md="4">
-            <v-switch
-              v-model="editedItem.inactive"
-              :label="editedItem.inactive ? 'Inactive' : 'Active'"
-              color="red darken-"
-              :value="false"
+            <v-autocomplete
+              label="Servicing"
+              v-model="editedItem.servicing_id"
+              :items="servicings"
+              item-text="id"
+              item-value="id"
+              required
             />
           </v-col>
           <v-col cols="12" sm="6" md="4">
             <v-text-field
-              label="Original Name"
-              v-model="editedItem.original_name"
-              type="text"
+              label="Time off-sync"
+              v-model="editedItem.off_sync"
+              type="number"
+              required
             />
+          </v-col>
+          <v-col cols="12" sm="6" md="12">
+            <v-file-input label="Log file" accept=".txt" />
           </v-col>
         </v-row>
       </v-container>
@@ -131,21 +63,15 @@ export default {
       type: Object,
       required: true
     },
-    positions: {
+    loggers: {
       type: Array,
       required: true
     },
-    logTypes: {
+    servicings: {
       type: Array,
       required: true
     }
-  },
-
-  data: () => ({
-    deploymentDatePicker: false,
-    terminationDatePicker: false,
-    requiredRules: [v => !!v || "Field is required"]
-  })
+  }
 };
 </script>
 

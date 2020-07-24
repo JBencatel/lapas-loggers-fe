@@ -21,8 +21,8 @@
         <log-edit-form
           :edited-item="editedItem"
           :form-title="formTitle"
-          :positions="positions"
-          :log-types="logTypes"
+          :loggers="loggers"
+          :servicings="servicings"
           @close="close"
           @save="save"
         />
@@ -61,29 +61,24 @@ export default {
     dialog: false,
     loading: true,
     headers: [
-      { text: "Name", align: "start", value: "name" },
-      { text: "Position", value: "position_id" },
-      { text: "Log Type", value: "log_type" },
-      { text: "Deployment Date", value: "deployment_date" },
-      { text: "Termination Date", value: "termination_date" },
-      { text: "Inactive", value: "inactive" },
+      { text: "Logger", align: "start", value: "logger_id" },
+      { text: "Servicing", value: "servicing_id" },
+      { text: "Time Off-Sync", value: "off_sync" },
+      { text: "File", value: "log_file" },
       { text: "Actions", value: "actions", sortable: false }
     ],
 
     editedIndex: -1,
     editedItem: {},
     defaultItem: {
-      name: undefined,
-      position_id: undefined,
-      log_type: undefined,
-      deployment_date: undefined,
-      termination_date: undefined,
-      inactive: false,
-      original_name: undefined
+      logger_id: undefined,
+      servicing_id: undefined,
+      log_file: undefined,
+      off_sync: undefined
     },
 
-    positions: [],
-    logTypes: []
+    loggers: [],
+    servicings: []
   }),
 
   computed: {
@@ -111,8 +106,8 @@ export default {
       "addLog",
       "editLog",
       "removeLog",
-      "fetchPositions",
-      "fetchOptionsList"
+      "fetchLoggers",
+      "fetchServicings"
     ]),
 
     initialize() {
@@ -127,11 +122,11 @@ export default {
     },
 
     getOptionsLists() {
-      this.fetchPositions().then(data => {
-        this.positions = data;
+      this.fetchLoggers().then(data => {
+        this.loggers = data;
       });
-      this.fetchOptionsList("log-types").then(data => {
-        this.logTypes = data;
+      this.fetchServicings().then(data => {
+        this.servicings = data;
       });
     },
 
