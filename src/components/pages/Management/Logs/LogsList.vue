@@ -23,6 +23,7 @@
           :form-title="formTitle"
           :loggers="loggers"
           :servicings="servicings"
+          :shores="shores"
           @close="close"
           @save="save"
         />
@@ -61,7 +62,7 @@ export default {
     dialog: false,
     loading: true,
     headers: [
-      { text: "Logger", align: "start", value: "logger_id" },
+      { text: "Logger", align: "start", value: "serial_id" },
       { text: "Servicing", value: "servicing_id" },
       { text: "Time Off-Sync", value: "off_sync" },
       { text: "File", value: "log_file" },
@@ -71,14 +72,15 @@ export default {
     editedIndex: -1,
     editedItem: {},
     defaultItem: {
-      logger_id: undefined,
+      serial_id: undefined,
       servicing_id: undefined,
       log_file: undefined,
       off_sync: undefined
     },
 
     loggers: [],
-    servicings: []
+    servicings: [],
+    shores: []
   }),
 
   computed: {
@@ -107,7 +109,8 @@ export default {
       "editLog",
       "removeLog",
       "fetchLoggers",
-      "fetchServicings"
+      "fetchServicings",
+      "fetchShores"
     ]),
 
     initialize() {
@@ -127,6 +130,9 @@ export default {
       });
       this.fetchServicings().then(data => {
         this.servicings = data;
+      });
+      this.fetchShores().then(data => {
+        this.shores = data;
       });
     },
 

@@ -10,7 +10,7 @@
           <v-col cols="12" sm="6" md="4">
             <v-autocomplete
               label="Logger"
-              v-model="editedItem.logger_id"
+              v-model="editedItem.serial_id"
               :items="loggers"
               item-text="name"
               item-value="id"
@@ -22,7 +22,7 @@
               label="Servicing"
               v-model="editedItem.servicing_id"
               :items="servicings"
-              item-text="id"
+              :item-text="servicingName"
               item-value="id"
               required
             />
@@ -70,6 +70,21 @@ export default {
     servicings: {
       type: Array,
       required: true
+    },
+    shores: {
+      type: Array,
+      required: true
+    }
+  },
+
+  methods: {
+    servicingName(servicingItem) {
+      let shoreName = this.getShoreName(servicingItem.shore_id);
+      return shoreName + " - " + servicingItem.date;
+    },
+    getShoreName(id) {
+      let shore = this.shores.find(item => item.id === id);
+      return shore.name;
     }
   }
 };
