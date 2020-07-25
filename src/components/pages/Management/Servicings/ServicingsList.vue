@@ -22,6 +22,7 @@
           :edited-item="editedItem"
           :form-title="formTitle"
           :shores="shores"
+          :people="people"
           @close="close"
           @save="save"
         />
@@ -70,10 +71,12 @@ export default {
     defaultItem: {
       date: undefined,
       shore_id: undefined,
+      participants: undefined,
       notes: undefined
     },
 
-    shores: []
+    shores: [],
+    people: []
   }),
 
   computed: {
@@ -101,7 +104,8 @@ export default {
       "addServicing",
       "editServicing",
       "removeServicing",
-      "fetchShores"
+      "fetchShores",
+      "fetchPeople"
     ]),
 
     initialize() {
@@ -118,6 +122,9 @@ export default {
     getOptionsLists() {
       this.fetchShores().then(data => {
         this.shores = data;
+      });
+      this.fetchPeople().then(data => {
+        this.people = data;
       });
     },
 

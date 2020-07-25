@@ -7,7 +7,7 @@
     <v-card-text>
       <v-container>
         <v-row>
-          <v-col cols="12" sm="6">
+          <v-col cols="12" sm="6" md="4">
             <v-menu
               ref="datePicker"
               v-model="datePicker"
@@ -35,14 +35,25 @@
               />
             </v-menu>
           </v-col>
-          <v-col cols="12" sm="6">
+          <v-col cols="12" sm="6" md="4">
             <v-autocomplete
               label="Shore"
               v-model="editedItem.shore_id"
               :items="shores"
               item-text="name"
               item-value="id"
-              
+              required
+            />
+          </v-col>
+          <v-col cols="12" sm="6" md="4">
+            <v-autocomplete
+              label="Participants"
+              v-model="editedItem.participants"
+              :items="people"
+              item-text="name"
+              item-value="id"
+              :return-object="false"
+              multiple
               required
             />
           </v-col>
@@ -75,6 +86,10 @@ export default {
       required: true
     },
     shores: {
+      type: Array,
+      required: true
+    },
+    people: {
       type: Array,
       required: true
     }
