@@ -54,7 +54,12 @@
                       />
                     </v-card-text>
                     <v-card-actions class="pt-0">
-                      <v-btn color="blue darken-1" text @click="addOption"
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        :loading="loading"
+                        :disabled="loading"
+                        @click="addOption"
                         >Add</v-btn
                       >
                     </v-card-actions>
@@ -82,7 +87,7 @@
     </v-card-text>
 
     <v-card-actions>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <v-btn color="blue darken-1" text @click="$emit('close')">Cancel</v-btn>
       <v-btn color="blue darken-1" text @click="$emit('save')">Save</v-btn>
     </v-card-actions>
@@ -115,22 +120,25 @@ export default {
 
   data: () => ({
     addFieldWorkUnitPopUp: false,
-    newFieldWorkUnit: undefined
+    newFieldWorkUnit: undefined,
+    loading: false
   }),
 
   methods: {
     ...mapActions(["addOptionsListItem", "fetchOptionsList"]),
 
     addOption() {
+      this.loading = true;
       let listName = "field-work-units";
       this.addOptionsListItem({
         listName: listName,
         itemData: { name: this.newFieldWorkUnit }
       }).then(() => {
         this.fetchOptionsList(listName).then(data => {
-          this.fieldWorkUnits = data;
-          this.newFieldWorkUnit = undefined;
+          this.$emit("updateOptionsList", data);
           this.addFieldWorkUnitPopUp = false;
+          this.newFieldWorkUnit = undefined;
+          this.loading = false;
         });
       });
     }

@@ -23,6 +23,7 @@
           :form-title="formTitle"
           :countries="countries"
           :field-work-units="fieldWorkUnits"
+          @updateOptionsList="fieldWorkUnits = $event"
           @close="close"
           @save="save"
         />
