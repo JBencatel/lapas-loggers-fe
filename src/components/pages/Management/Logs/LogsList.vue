@@ -38,6 +38,14 @@
       class="elevation-1"
     >
       <template v-slot:item.actions="{ item }">
+        <v-icon
+          v-if="item.log_file"
+          small
+          class="mr-2"
+          @click.stop="downloadFile(item)"
+        >
+          mdi-file-download
+        </v-icon>
         <v-icon small class="mr-2" @click.stop="editItem(item)">
           mdi-pencil
         </v-icon>
@@ -51,7 +59,9 @@
 
 <script>
 import { mapActions } from "vuex";
+import FileSaver from "file-saver";
 import LogEditForm from "./LogEditForm";
+import LogService from "@/services/LogService.js";
 
 export default {
   name: "ManageLogsList",
@@ -105,7 +115,6 @@ export default {
   methods: {
     ...mapActions([
       "fetchLogs",
-      "addLog",
       "editLog",
       "removeLog",
       "fetchLoggers",
@@ -160,12 +169,21 @@ export default {
     },
 
     save() {
-      if (this.editedIndex > -1) {
-        this.editLog(this.editedItem);
-      } else {
-        this.addLog(this.editedItem);
-      }
+      const data = new FormData();
+      Object.keys(this.editedItem).forEach(key => {
+        data.append(key, this.editedItem[key]);
+      });
+      this.editLog(data);
       this.close();
+    },
+
+    downloadFile(log) {
+      LogService.downloadLogFile(log.id, fileContent => {
+        let file = new Blob([fileContent], {
+          type: "text/plain;charset=utf-8"
+        });
+        FileSaver.saveAs(file, log.log_file);
+      });
     }
   }
 };

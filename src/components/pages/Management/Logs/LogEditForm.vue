@@ -36,7 +36,11 @@
             />
           </v-col>
           <v-col cols="12" sm="6" md="12">
-            <v-file-input label="Log file" accept=".txt" />
+            <v-file-input
+              label="Log file"
+              accept=".txt"
+              @change="handleFileUpload"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -77,6 +81,8 @@ export default {
     }
   },
 
+  data: () => ({ file: undefined }),
+
   methods: {
     servicingName(servicingItem) {
       let shoreName = this.getShoreName(servicingItem.shore_id);
@@ -85,6 +91,10 @@ export default {
     getShoreName(id) {
       let shore = this.shores.find(item => item.id === id);
       return shore.name;
+    },
+
+    handleFileUpload(file) {
+      this.editedItem.log_file = file;
     }
   }
 };

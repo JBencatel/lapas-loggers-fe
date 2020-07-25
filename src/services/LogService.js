@@ -23,20 +23,13 @@ export default {
       });
   },
 
-  createLog(data, onSuccess, onError) {
+  editLog(data, onSuccess, onError) {
     return API()
-      .post("/logs", data)
-      .then(resp => {
-        onSuccess(resp.data);
+      .post("/logs", data, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
       })
-      .catch(error => {
-        onError(error);
-      });
-  },
-
-  updateLog(data, onSuccess, onError) {
-    return API()
-      .put("/logs", data)
       .then(resp => {
         onSuccess(resp.data);
       })
@@ -48,6 +41,17 @@ export default {
   deleteLog(logID, onSuccess, onError) {
     return API()
       .delete("/logs/" + logID)
+      .then(resp => {
+        onSuccess(resp.data);
+      })
+      .catch(error => {
+        onError(error);
+      });
+  },
+
+  downloadLogFile(logID, onSuccess, onError) {
+    return API()
+      .get("/logs/" + logID + "/file")
       .then(resp => {
         onSuccess(resp.data);
       })

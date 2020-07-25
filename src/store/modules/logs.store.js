@@ -52,20 +52,9 @@ const actions = {
     });
   },
 
-  addLog({ dispatch }, data) {
-    return new Promise(resolve => {
-      LogService.createLog(data, result => {
-        dispatch("fetchLogs");
-        resolve(result);
-      }).catch(error => {
-        throw new Error(`API ${error}`);
-      });
-    });
-  },
-
   editLog({ dispatch }, data) {
     return new Promise(resolve => {
-      LogService.updateLog(data, result => {
+      LogService.editLog(data, result => {
         dispatch("fetchLogs");
         resolve(result);
       }).catch(error => {
