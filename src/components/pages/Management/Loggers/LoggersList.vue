@@ -23,6 +23,7 @@
           :form-title="formTitle"
           :positions="positions"
           :logger-types="loggerTypes"
+          @updateOptionsList="loggerTypes = $event"
           @close="close"
           @save="save"
         />
@@ -63,7 +64,7 @@ export default {
     headers: [
       { text: "Name", align: "start", value: "name" },
       { text: "Position", value: "position_id" },
-      { text: "Logger Type", value: "logger_type" },
+      { text: "Logger Type", value: "logger_type_id" },
       { text: "Deployment Date", value: "deployment_date" },
       { text: "Termination Date", value: "termination_date" },
       { text: "Inactive", value: "inactive" },
@@ -75,7 +76,7 @@ export default {
     defaultItem: {
       name: undefined,
       position_id: undefined,
-      logger_type: undefined,
+      logger_type_id: undefined,
       deployment_date: undefined,
       termination_date: undefined,
       inactive: false,

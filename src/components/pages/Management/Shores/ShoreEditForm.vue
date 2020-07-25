@@ -35,7 +35,7 @@
               </v-col>
               <v-col cols="1" align-self="center">
                 <v-menu
-                  v-model="addFieldWorkUnitPopUp"
+                  v-model="addOptionPopUp"
                   :close-on-content-click="false"
                   :nudge-width="200"
                   offset-x
@@ -50,7 +50,7 @@
                     <v-card-text class="pb-0">
                       <v-text-field
                         label="New Field Work Unit"
-                        v-model="newFieldWorkUnit"
+                        v-model="newOption"
                       />
                     </v-card-text>
                     <v-card-actions class="pt-0">
@@ -119,8 +119,8 @@ export default {
   },
 
   data: () => ({
-    addFieldWorkUnitPopUp: false,
-    newFieldWorkUnit: undefined,
+    addOptionPopUp: false,
+    newOption: undefined,
     loading: false
   }),
 
@@ -132,12 +132,12 @@ export default {
       let listName = "field-work-units";
       this.addOptionsListItem({
         listName: listName,
-        itemData: { name: this.newFieldWorkUnit }
+        itemData: { name: this.newOption }
       }).then(() => {
         this.fetchOptionsList(listName).then(data => {
           this.$emit("updateOptionsList", data);
-          this.addFieldWorkUnitPopUp = false;
-          this.newFieldWorkUnit = undefined;
+          this.addOptionPopUp = false;
+          this.newOption = undefined;
           this.loading = false;
         });
       });

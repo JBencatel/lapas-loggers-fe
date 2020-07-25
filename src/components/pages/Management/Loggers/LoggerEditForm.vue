@@ -26,14 +26,51 @@
             />
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-autocomplete
-              label="Logger Type"
-              v-model="editedItem.logger_type_id"
-              :items="loggerTypes"
-              item-text="name"
-              item-value="id"
-              required
-            />
+            <v-row no-gutters justify="space-between">
+              <v-col cols="10">
+                <v-autocomplete
+                  label="Logger Type"
+                  v-model="editedItem.logger_type_id"
+                  :items="loggerTypes"
+                  item-text="name"
+                  item-value="id"
+                  required
+                />
+              </v-col>
+              <v-col cols="1" align-self="center">
+                <v-menu
+                  v-model="addOptionPopUp"
+                  :close-on-content-click="false"
+                  :nudge-width="200"
+                  offset-x
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn x-small icon v-bind="attrs" v-on="on">
+                      <v-icon>mdi-plus-circle</v-icon>
+                    </v-btn>
+                  </template>
+
+                  <v-card>
+                    <v-card-text class="pb-0">
+                      <v-text-field
+                        label="New Logger Type"
+                        v-model="newOption"
+                      />
+                    </v-card-text>
+                    <v-card-actions class="pt-0">
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        :loading="loading"
+                        :disabled="loading"
+                        @click="addOption"
+                        >Add
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-menu>
+              </v-col>
+            </v-row>
           </v-col>
           <v-col cols="12" sm="6" md="4">
             <v-menu
@@ -119,6 +156,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: "PositionEditForm",
 
@@ -144,8 +182,32 @@ export default {
   data: () => ({
     deploymentDatePicker: false,
     terminationDatePicker: false,
-    requiredRules: [v => !!v || "Field is required"]
-  })
+    requiredRules: [v => !!v || "Field is required"],
+
+    addOptionPopUp: false,
+    newOption: undefined,
+    loading: false
+  }),
+
+  methods: {
+    ...mapActions(["addOptionsListItem", "fetchOptionsList"]),
+
+    addOption() {
+      this.loading = true;
+      let listName = "logger-types";
+      this.addOptionsListItem({
+        listName: listName,
+        itemData: { name: this.newOption }
+      }).then(() => {
+        this.fetchOptionsList(listName).then(data => {
+          this.$emit("updateOptionsList", data);
+          this.addOptionPopUp = false;
+          this.newOption = undefined;
+          this.loading = false;
+        });
+      });
+    }
+  }
 };
 </script>
 
