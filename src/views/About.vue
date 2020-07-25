@@ -6,6 +6,8 @@
           <v-btn icon @click="$router.push({ name: 'Home' })">
             <v-icon color="white">mdi-arrow-left</v-icon>
           </v-btn>
+          <v-spacer />
+          <navbar-current-user />
         </v-toolbar>
       </v-col>
       <v-col
@@ -19,8 +21,10 @@
 </template>
 
 <script>
+import NavbarCurrentUser from "../components/molecules/CurrentUser";
 export default {
-  name: "ExplorePage"
+  name: "ExplorePage",
+  components: { NavbarCurrentUser }
 };
 </script>
 

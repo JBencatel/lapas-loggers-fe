@@ -8,6 +8,8 @@
       >
         Lapas Loggers
       </v-toolbar-title>
+      <v-spacer />
+      <navbar-current-user />
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" app clipped>
@@ -46,8 +48,11 @@
 </template>
 
 <script>
+import NavbarCurrentUser from "../molecules/CurrentUser";
 export default {
   name: "AppNavigation",
+
+  components: { NavbarCurrentUser },
 
   props: {
     items: {
