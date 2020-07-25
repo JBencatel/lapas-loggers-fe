@@ -23,12 +23,13 @@
             />
           </v-col>
           <v-col cols="12" sm="6" md="4">
-            <v-autocomplete
+            <v-combobox
               v-model="editedItem.fwunit_id"
               label="Field Work Unit"
               :items="fieldWorkUnits"
               item-text="name"
               item-value="id"
+              :retun-object="false"
             />
           </v-col>
           <v-col cols="12" sm="6" md="4">
