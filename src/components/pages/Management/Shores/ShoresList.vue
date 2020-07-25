@@ -112,11 +112,10 @@ export default {
   methods: {
     ...mapActions([
       "fetchShores",
+      "fetchOptionsList",
       "addShore",
       "editShore",
-      "removeShore",
-      "fetchOptionsList",
-      "addOptionsListItem"
+      "removeShore"
     ]),
 
     initialize() {
@@ -167,23 +166,6 @@ export default {
     },
 
     save() {
-      if (typeof this.editedItem.fwunit_id === "string") {
-        this.addOptionsListItem({
-          listName: "field-work-units",
-          itemData: { name: this.editedItem.fwunit_id }
-        }).then(fieldWorkUnit => {
-          this.editedItem.fwunit_id = fieldWorkUnit.id;
-          this.finishSave();
-        });
-      } else if (typeof this.editedItem.fwunit_id === "object") {
-        this.editedItem.fwunit_id = this.editedItem.fwunit_id.id;
-        this.finishSave();
-      } else {
-        this.finishSave();
-      }
-    },
-
-    finishSave() {
       if (this.editedIndex > -1) {
         this.editShore(this.editedItem);
       } else {
