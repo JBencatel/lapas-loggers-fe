@@ -7,7 +7,7 @@
     <v-card-text>
       <v-container>
         <v-row>
-          <v-col cols="12" sm="6" md="4">
+          <v-col cols="12" sm="6">
             <v-menu
               ref="datePicker"
               v-model="datePicker"
@@ -35,7 +35,7 @@
               />
             </v-menu>
           </v-col>
-          <v-col cols="12" sm="6" md="4">
+          <v-col cols="12" sm="6">
             <v-autocomplete
               label="Shore"
               v-model="editedItem.shore_id"
@@ -45,7 +45,7 @@
               required
             />
           </v-col>
-          <v-col cols="12" sm="6" md="4">
+          <v-col cols="12">
             <v-autocomplete
               label="Participants"
               v-model="editedItem.participants"
@@ -58,7 +58,12 @@
             />
           </v-col>
           <v-col cols="12">
-            <v-textarea label="Notes" v-model="editedItem.notes" />
+            <v-textarea
+              label="Notes"
+              v-model="editedItem.notes"
+              rows="1"
+              auto-grow
+            />
           </v-col>
         </v-row>
       </v-container>
