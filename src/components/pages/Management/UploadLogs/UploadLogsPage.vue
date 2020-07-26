@@ -210,7 +210,7 @@ export default {
       let fileContent = result.split("\n");
       log.off_sync = fileContent[1];
       let longSerial = fileContent[0];
-      log.shortSerial = longSerial.substr(longSerial.length - 8);
+      log.shortSerial = longSerial.substr(longSerial.length - 8, 6);
     },
 
     getLoggerID(shortSerial) {
