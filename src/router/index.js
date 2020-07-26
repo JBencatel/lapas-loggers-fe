@@ -22,12 +22,14 @@ const routes = [
   {
     path: "/explore",
     name: "Explore",
-    component: () => import(/* webpackChunkName: "explore" */ "../views/Explore.vue")
+    component: () =>
+      import(/* webpackChunkName: "explore" */ "../views/Explore.vue")
   },
   {
     path: "/management",
     name: "Management",
-    component: () => import(/* webpackChunkName: "management" */ "../views/Management.vue"),
+    component: () =>
+      import(/* webpackChunkName: "management" */ "../views/Management.vue"),
     children: [
       {
         path: "upload-logs",
