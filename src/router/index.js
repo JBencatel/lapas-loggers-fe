@@ -36,7 +36,6 @@ const routes = [
       },
       {
         path: "shores",
-        name: "Shores",
         component: ShoresPage,
         children: [
           {

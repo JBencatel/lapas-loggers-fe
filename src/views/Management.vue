@@ -23,7 +23,7 @@ export default {
         page: "Upload Logs"
       },
       { divider: true },
-      { icon: "mdi-beach", text: "Shores", page: "Shores List" },
+      { icon: "mdi-beach", text: "Shores List", page: "Shores List" },
       { icon: "mdi-map-marker", text: "Positions", page: "Positions" },
       { icon: "mdi-leak", text: "Loggers", page: "Loggers" },
       { icon: "mdi-account-group", text: "People", page: "People" },
