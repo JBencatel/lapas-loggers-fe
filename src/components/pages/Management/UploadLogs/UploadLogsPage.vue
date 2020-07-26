@@ -21,12 +21,16 @@
 
       <v-stepper-items>
         <v-stepper-content step="1">
-          <servicing-selection />
+          <servicing-selection @selectServicing="selectedServicing = $event" />
 
-          <v-btn color="primary" @click="e1 = 2">
+          <v-btn
+            color="primary"
+            :disabled="servicingContinueDisabled"
+            :loading="loadingNewServicing"
+            @click="servicingContinue"
+          >
             Continue
           </v-btn>
-          <v-btn text>Cancel</v-btn>
         </v-stepper-content>
 
         <v-stepper-content step="2">
@@ -52,15 +56,44 @@
 </template>
 
 <script>
-import ServicingSelection from './ServicingSelection'
+import ServicingSelection from "./ServicingSelection";
+import { mapActions } from "vuex";
 export default {
   name: "ManagementUploadLogs",
 
-  components: {ServicingSelection},
+  components: { ServicingSelection },
 
   data: () => ({
-    e1: 1
-  })
+    e1: 1,
+    loadingNewServicing: false,
+    selectedServicing: undefined
+  }),
+
+  computed: {
+    servicingContinueDisabled() {
+      return !(
+        this.selectedServicing &&
+        (this.selectedServicing.id ||
+          (this.selectedServicing.date && this.selectedServicing.shore_id))
+      );
+    }
+  },
+
+  methods: {
+    ...mapActions(["addServicing"]),
+    servicingContinue() {
+      if (this.selectedServicing.id) {
+        this.e1 = 2;
+      } else {
+        this.loadingNewServicing = true;
+        this.addServicing(this.selectedServicing).then(newServicing => {
+          this.selectedServicing = newServicing;
+          this.loadingNewServicing = false;
+          this.e1 = 2;
+        });
+      }
+    }
+  }
 };
 </script>
 
