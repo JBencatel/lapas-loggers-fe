@@ -156,9 +156,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from "vuex";
 export default {
-  name: "PositionEditForm",
+  name: "LoggerEditForm",
 
   props: {
     formTitle: {

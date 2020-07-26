@@ -21,7 +21,12 @@
 
       <v-stepper-items>
         <v-stepper-content step="1">
-          <servicing-selection @selectServicing="selectedServicing = $event" />
+          <servicing-selection
+            :servicings="servicings"
+            :shores="shores"
+            :people="people"
+            @selectServicing="selectedServicing = $event"
+          />
 
           <v-btn
             color="primary"
@@ -47,10 +52,18 @@
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
+          <check-logs
+            :pre-check-logs="newLogs"
+            :loggers="loggers"
+            @updateLoggersList="getLoggers"
+          />
 
-          <v-btn color="primary" @click="e1 = 1">
-            Continue
+          <v-btn
+            color="primary"
+            :disabled="uploadDisabled"
+            @click="uploadAndRestart"
+          >
+            Upload
           </v-btn>
         </v-stepper-content>
       </v-stepper-items>
@@ -59,23 +72,33 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 import ServicingSelection from "./ServicingSelection";
 import FileSelection from "./FileSelection";
-import { mapActions } from "vuex";
+import CheckLogs from "./CheckLogs";
+
 export default {
   name: "ManagementUploadLogs",
 
-  components: { ServicingSelection, FileSelection },
+  components: { ServicingSelection, FileSelection, CheckLogs },
 
   data: () => ({
     e1: 1,
     loadingNewServicing: false,
     selectedServicing: undefined,
+    selectedShore: undefined,
 
     loadingFiles: false,
     selectedFiles: [],
 
-    logs: []
+    newLogs: [],
+
+    servicings: [],
+    shores: [],
+    people: [],
+    loggers: [],
+
+    uploadStarted: false
   }),
 
   computed: {
@@ -89,11 +112,57 @@ export default {
 
     fileSelectionContinueDisabled() {
       return this.selectedFiles.length === 0;
+    },
+
+    uploadDisabled() {
+      if (this.uploadStarted) {
+        return true;
+      }
+      for (let log of this.newLogs) {
+        if (log.serial_id === undefined) {
+          return true;
+        }
+      }
+      return false;
     }
   },
 
+  mounted() {
+    this.initialize();
+  },
+
   methods: {
-    ...mapActions(["addServicing"]),
+    ...mapActions([
+      "fetchServicings",
+      "fetchShores",
+      "fetchPeople",
+      "addServicing",
+      "fetchLoggers",
+      "editLog"
+    ]),
+
+    initialize() {
+      this.getOptionsLists();
+    },
+
+    getLoggers() {
+      this.fetchLoggers().then(data => {
+        this.loggers = data;
+      });
+    },
+
+    getOptionsLists() {
+      this.fetchServicings().then(data => {
+        this.servicings = data;
+      });
+      this.fetchShores().then(data => {
+        this.shores = data;
+      });
+      this.fetchPeople().then(data => {
+        this.people = data;
+      });
+      this.getLoggers();
+    },
 
     servicingContinue() {
       if (this.selectedServicing.id) {
@@ -102,6 +171,9 @@ export default {
         this.loadingNewServicing = true;
         this.addServicing(this.selectedServicing).then(newServicing => {
           this.selectedServicing = newServicing;
+          this.selectedShore = this.shores.find(
+            shore => shore.id === this.selectedServicing.shore_id
+          );
           this.loadingNewServicing = false;
           this.e1 = 2;
         });
@@ -114,27 +186,57 @@ export default {
         let log = {
           servicing_id: this.selectedServicing.id,
           log_file: file,
-          logger_id: undefined,
           off_sync: undefined,
-          loggerLongSerial: undefined,
-          loggerShortSerial: undefined
+          serial_id: undefined,
+
+          fileName: file.name,
+          shortSerial: undefined
         };
 
-        let fileContent = [];
         let reader = new FileReader();
         reader.readAsText(file);
         reader.onload = () => {
           let result = reader.result;
-          fileContent = result.split("\n");
-          let longSerial = fileContent[0];
-          log.loggerLongSerial = longSerial;
-          log.loggerShortSerial = longSerial.substr(longSerial.length - 8);
-          log.off_sync = fileContent[1];
-          this.logs.push(log);
+          this.getFileData(log, result);
+          log.serial_id = this.getLoggerID(log.shortSerial);
+          this.newLogs.push(log);
         };
       });
       this.loadingFiles = false;
       this.e1 = 3;
+    },
+
+    getFileData(log, result) {
+      let fileContent = result.split("\n");
+      log.off_sync = fileContent[1];
+      let longSerial = fileContent[0];
+      log.shortSerial = longSerial.substr(longSerial.length - 8);
+    },
+
+    getLoggerID(shortSerial) {
+      let selectedLogger = this.loggers.find(
+        logger => logger.name === shortSerial
+      );
+      if (selectedLogger) {
+        return selectedLogger.id;
+      } else return undefined;
+    },
+
+    uploadAndRestart() {
+      this.uploadStarted = true;
+      this.newLogs.forEach(log => {
+        const data = new FormData();
+        Object.keys(log).forEach(key => {
+          data.append(key, log[key]);
+        });
+        this.editLog(data)
+          .then(() => {
+            log.state = "success";
+          })
+          .catch(() => {
+            log.state = "fail";
+          });
+      });
     }
   }
 };

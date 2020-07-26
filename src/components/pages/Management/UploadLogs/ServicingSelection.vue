@@ -107,9 +107,15 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+
 export default {
   name: "ManagementUploadFileServicingSelection",
+
+  props: {
+    servicings: { type: Array, required: true },
+    shores: { type: Array, required: true },
+    people: { type: Array, required: true }
+  },
 
   data: () => ({
     optionSelected: undefined,
@@ -117,10 +123,7 @@ export default {
     servicingSelected: undefined,
 
     datePicker: false,
-    requiredRules: [v => !!v || "Field is required"],
-    servicings: [],
-    shores: [],
-    people: []
+    requiredRules: [v => !!v || "Field is required"]
   }),
 
   computed: {
@@ -151,30 +154,7 @@ export default {
       }
     }
   },
-
-  mounted() {
-    this.initialize();
-  },
-
   methods: {
-    ...mapActions(["fetchServicings", "fetchShores", "fetchPeople"]),
-
-    initialize() {
-      this.getOptionsLists();
-    },
-
-    getOptionsLists() {
-      this.fetchServicings().then(data => {
-        this.servicings = data;
-      });
-      this.fetchShores().then(data => {
-        this.shores = data;
-      });
-      this.fetchPeople().then(data => {
-        this.people = data;
-      });
-    },
-
     servicingName(servicingItem) {
       let shoreName = this.getShoreName(servicingItem.shore_id);
       return shoreName + " - " + servicingItem.date;
